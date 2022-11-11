@@ -137,7 +137,7 @@ function AddEdit(props) {
             const reader = new FileReader();
             reader.onloadend = () => {
                 // Use a regex to remove data url part
-                const base64String = reader.result;
+                // const base64String = reader.result;
                 // console.log(base64String);
             //data = base64String;
                 document.getElementById('preview').src = data;
