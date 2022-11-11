@@ -1,0 +1,201 @@
+.cards {
+  padding: 4rem;
+  padding-top: 0rem;
+}
+
+.cards__container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  max-width: 1120px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.cards__wrapper {
+  position: relative;
+  margin: 50px 0 45px;
+}
+
+.cards__items {
+  margin-bottom: 24px;
+}
+
+.cards__figure {
+  display: flex;
+  flex: 1;
+  margin: 0 1rem;
+  border-radius: 10px;
+  width: 320px;
+}
+
+.cards__item__empty {
+  display: flex;
+  flex: 1;
+  margin: 0 1rem;
+  border-radius: 10px;
+  width: 300px;
+  visibility: hidden;
+}
+
+.cards__item__link {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17);
+  -webkit-filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
+  filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
+  border-radius: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  background-color: rgb(255, 255, 255);
+}
+
+.cards__item__pic-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 67%;
+  overflow: hidden;
+}
+
+.fade-img {
+  animation-name: fade-img;
+  animation-duration: 2s;
+}
+
+.cards__item__pic-wrap::after {
+  content: attr(data-category);
+  position: absolute;
+  bottom: 0;
+  margin-left: 10px;
+  padding: 6px 8px;
+  max-width: calc((100%) - 60px);
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(90deg, rgb(26, 23, 23)0%, rgb(12 165 80)  100%);
+  box-sizing: border-box;
+}
+
+.cards__item__img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  transition: all 0.2s linear;
+}
+
+.cards__item__img:hover {
+  transform: scale(1.1);
+}
+
+.cards__item__info {
+  padding: 0px 20px 10px 20px;
+  /* top, right, bottom, left */
+}
+
+.cards__item__text {
+  color: #252e48;
+  font-size: 18px;
+  line-height: 24px;
+  height: 45px;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media only screen and (min-width: 1200px) {
+  .content__blog__container {
+    width: 84%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .cards__items {
+    display: flex;
+  }
+
+  .cards__home {
+    display: flex;
+  }
+}
+
+
+@media only screen and (max-width: 1024px) {
+  .cards__item {
+    margin-bottom: 2rem;
+  }
+}
+
+/* My Phone sizes 
+  Vertical: 654x360 
+  Horizontal: 274x710 */
+@media only screen and (max-width: 780px) {
+  @media only screen and (max-height: 300px) {
+    .cards__item {
+      width: 150px;
+      margin-bottom: 0rem;
+    }
+
+    .cards__items {
+      display: flex;
+      margin-bottom: 0rem;
+    }
+
+    .cards__item__info {
+      padding: 10px 10px 0px 10px;
+    }
+
+    .cards__item__text {
+      color: #252e48;
+      font-size: 14px;
+      line-height: 18px;
+      height: 45px;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+/* HomeCards  */
+
+h2 {
+  color: white;
+  text-align: center;
+}
+
+.blurimage {
+  filter: blur(2px);
+  transition: all 0.2s linear;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.blurimage:hover {
+  transform: scale(1.1);
+}
+
+.cards__home {
+  display: flex;
+  flex: 1;
+  margin: 0 1rem;
+  border-radius: 10px;
+  width: 320px;
+  height: 150px;
+}
