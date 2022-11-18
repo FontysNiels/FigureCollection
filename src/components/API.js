@@ -269,9 +269,9 @@ export const AddFigureImage = (id, selectedFile) => {
 
 
 }
-export const GetAllFigureImages = () => {
+export const GetAllPreviewFigureImages = () => {
 
-  let url = 'https://localhost:7281/api/FigureImages/allImages';
+  let url = 'https://localhost:7281/api/FigureImages/PreviewImages';
   const [ImagesData, setFigures] = useState([])
 
   useEffect(() => {
@@ -283,7 +283,6 @@ export const GetAllFigureImages = () => {
 
   return ImagesData;
 }
-
 export const GetSpecificFigureImageData = (figureId) => {
   console.log(figureId)
   const [imagename, setImageName] = useState([])
@@ -318,7 +317,8 @@ export const GetSpecificFigureImage = (ImageName, classUse) => {
       const image = document.createElement('img');
       const box = document.getElementById('box');
       const CardItem = document.getElementById(ImageName);
-
+      const adminPreview = document.getElementById('adminpage');
+      
       image.setAttribute(
         'src',
         imagesrc,
@@ -327,6 +327,10 @@ export const GetSpecificFigureImage = (ImageName, classUse) => {
       if (classUse === "cards") {
         image.className = "cards__item__img";
         CardItem.appendChild(image);
+      }
+      else if(classUse === "admin"){
+        image.className = "w-25";
+        adminPreview.appendChild(image);
       }
       else {
         div.className = classUse;

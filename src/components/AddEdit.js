@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import axios from 'axios';
-import { GetAllBrands, GetAllManufacturers, GetAllCharacters, GetAllLines, GetAllEditions, GetAllFigures, AddFigureImage } from './API';
+import { GetAllBrands, GetAllManufacturers, GetAllCharacters, GetAllLines, GetAllEditions, GetAllFigures, AddFigureImage, GetSpecificFigureImage, GetSpecificFigureImageData } from './API';
 
 function AddEdit(props) {
     let AllBrands = [];
@@ -9,7 +9,6 @@ function AddEdit(props) {
     let AllLines = [];
     let AllEditions = [];
     let AllFigures = [];
-
 
     AllBrands = GetAllBrands();
     AllManufacturers = GetAllManufacturers();
@@ -23,6 +22,20 @@ function AddEdit(props) {
     let SelectCharacters = [];
     let SelectLines = [];
     let SelectEditions = [];
+
+    const DataId = useRef();
+    const DataName = useRef();
+
+
+    const figureId = useRef();
+    const names = useRef();
+    const brands = useRef();
+    const Manuf = useRef();
+    const Chara = useRef();
+    const Lines = useRef();
+    const Editions = useRef();
+    const Sizes = useRef();
+    const Scales = useRef();
 
     let ListItems = [];
     ListItems.push(
@@ -139,7 +152,7 @@ function AddEdit(props) {
                 // Use a regex to remove data url part
                 // const base64String = reader.result;
                 // console.log(base64String);
-            //data = base64String;
+                //data = base64String;
                 document.getElementById('preview').src = data;
                 // Logs wL2dvYWwgbW9yZ...
             };
@@ -148,10 +161,10 @@ function AddEdit(props) {
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     function addNewBrand(urlHelper) {
-        let names = document.getElementById("namesender").value;
+        
         let url = 'https://localhost:7281/api/' + urlHelper;
         axios.post(url, {
-            name: names
+            name: DataName.current.value
         })
             .then(function (response) {
                 console.log(response);
@@ -163,25 +176,22 @@ function AddEdit(props) {
         window.location.reload();
     }
     function EditNewBrand(urlHelper) {
-        let ids = document.getElementById("idsender").value;
-        let names = document.getElementById("namesender").value;
         let url = 'https://localhost:7281/api/' + urlHelper;
         axios.put(url, {
-            id: ids,
-            name: names
+            id: DataId.current.value,
+            name: DataName.current.value
         })
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 
         window.location.reload();
     }
     function DeleteNewBrand(urlHelper) {
-        let ids = document.getElementById("idsender").value;
-        let url = 'https://localhost:7281/api/' + urlHelper + '/' + ids;
+        let url = 'https://localhost:7281/api/' + urlHelper + '/' + DataId.current.value;
         axios.delete(url)
             .then(function (response) {
                 console.log(response);
@@ -192,36 +202,30 @@ function AddEdit(props) {
 
         window.location.reload();
     }
+
     //////////////////////////////////////////////////////////////////////////////////
     function addNewFigure() {
-        let names = document.getElementById("figName").value;
-        let brands = document.getElementById("figBrand").value;
-        let Manuf = document.getElementById("figMan").value;
-        let Chara = document.getElementById("figChar").value;
-        let Lines = document.getElementById("figLine").value;
-        let Editions = document.getElementById("figEdition").value;
-        let Sizes = document.getElementById("figSize").value;
-        let Scales = document.getElementById("figScale").value;
+
         let url = 'https://localhost:7281/api/Figures';
         axios.post(url, {
-            name: names,
+            name: names.current.value,
             brand: {
-                id: brands
+                id: brands.current.value
             },
             manufacturer: {
-                id: Manuf
+                id: Manuf.current.value
             },
             character: {
-                id: Chara
+                id: Chara.current.value
             },
             line: {
-                id: Lines
+                id: Lines.current.value
             },
             edition: {
-                id: Editions
+                id: Editions.current.value
             },
-            size: Sizes,
-            scale: Scales
+            size: Sizes.current.value,
+            scale: Scales.current.value
         })
             .then(function (response) {
                 console.log(response);
@@ -233,36 +237,28 @@ function AddEdit(props) {
         window.location.reload();
     }
     function EditFigure() {
-        let ids = document.getElementById("figId").value;
-        let names = document.getElementById("figName").value;
-        let brands = document.getElementById("figBrand").value;
-        let Manuf = document.getElementById("figMan").value;
-        let Chara = document.getElementById("figChar").value;
-        let Lines = document.getElementById("figLine").value;
-        let Editions = document.getElementById("figEdition").value;
-        let Sizes = document.getElementById("figSize").value;
-        let Scales = document.getElementById("figScale").value;
+
         let url = 'https://localhost:7281/api/Figures';
         axios.put(url, {
-            id: ids,
-            name: names,
+            id: figureId.current.value,
+            name: names.current.value,
             brand: {
-                id: brands
+                id: brands.current.value
             },
             manufacturer: {
-                id: Manuf
+                id: Manuf.current.value
             },
             character: {
-                id: Chara
+                id: Chara.current.value
             },
             line: {
-                id: Lines
+                id: Lines.current.value
             },
             edition: {
-                id: Editions
+                id: Editions.current.value
             },
-            size: Sizes,
-            scale: Scales
+            size: Sizes.current.value,
+            scale: Scales.current.value
         })
             .then(function (response) {
                 console.log(response);
@@ -274,8 +270,7 @@ function AddEdit(props) {
         window.location.reload();
     }
     function DeleteFigure() {
-        let ids = document.getElementById("figId").value;
-        let url = 'https://localhost:7281/api/Figures/' + ids;
+        let url = 'https://localhost:7281/api/Figures/' + figureId.current.value;
         axios.delete(url)
             .then(function (response) {
                 console.log(response);
@@ -288,34 +283,39 @@ function AddEdit(props) {
     }
     //////////////////////////////////////////////////////////////////////////////////
     function addNewImage() {
-        let ids = document.getElementById("figId").value;
-        if (ids) {
-            AddFigureImage(ids, data);
+        if (figureId.current.value) {
+            AddFigureImage(figureId.current.value, data);
         }
     }
 
     //////////////////////////////////////////////////////////////////////////////////
     let specificData = [];
     specificData = GetAllFigures();
-    function getFigureData() {
-        let ids = parseInt(document.getElementById("figId").value);
+    function getFigureData() {      
+        let ids = parseInt(figureId.current.value);
         for (let index = 0; index < specificData.length; index++) {
             if (specificData[index].id === ids) {
-                document.getElementById("figName").value = specificData[index].name;
-                document.getElementById("figBrand").value = specificData[index].brand.id;
-                document.getElementById("figMan").value = specificData[index].manufacturer.id;
-                document.getElementById("figChar").value = specificData[index].character.id;
-                document.getElementById("figLine").value = specificData[index].line.id;
-                document.getElementById("figEdition").value = specificData[index].edition.id;
-                document.getElementById("figSize").value = specificData[index].size;
-                document.getElementById("figScale").value = specificData[index].scale;
+                names.current.value = specificData[index].name;
+                brands.current.value = specificData[index].brand.id;
+                Manuf.current.value = specificData[index].manufacturer.id;
+                Chara.current.value = specificData[index].character.id;
+                Lines.current.value = specificData[index].line.id;
+                Editions.current.value = specificData[index].edition.id;
+                Sizes.current.value = specificData[index].size;
+                Scales.current.value = specificData[index].scale;
             }
         }
+
+        console.log(Manuf.current.value);
     }
+
+
+
 
     //////////////////////////////////////////////////////////////////////////////////
     return (
         <div className='row'>
+            
             <div className='col-2'>
                 <table className="table table-striped">
                     <thead>
@@ -330,8 +330,8 @@ function AddEdit(props) {
                 </table>
             </div>
             <div className='col-10 p-0 mt-3'>
-                <input type='text' className='form-control w-25' id='idsender' placeholder='ID' />
-                <input type='text' className='form-control w-25' id='namesender' placeholder='NAME' />
+                <input ref={DataId} type='text' className='form-control w-25' id='idsender' placeholder='ID' />
+                <input ref={DataName} type='text' className='form-control w-25' id='namesender' placeholder='NAME' />
 
                 <button className='btn btn-success' onClick={() => addNewBrand('Brands')}>Add Brand</button>
                 <button className='btn btn-success m-2' onClick={() => addNewBrand('Manufacturers')}>Add Manufacturer</button>
@@ -371,26 +371,27 @@ function AddEdit(props) {
                             {figuredata}
                         </tbody>
                     </table>
+                        
                     <div className="col-auto w-50">
-                        <input type='number' className='form-control' id='figId' placeholder='ID....' />
-                        <input type='text' className='form-control' id='figName' placeholder='NAME....' />
-                        <select className="form-select" id='figBrand' aria-label="Default select example">
+                        <input ref={figureId} type='number' className='form-control' id='figId' placeholder='ID....' />
+                        <input ref={names} type='text' className='form-control' id='figName' placeholder='NAME....' />
+                        <select ref={brands} className="form-select" id='figBrand' aria-label="Default select example">
                             {SelectBrands}
                         </select>
-                        <select className="form-select" id='figMan' aria-label="Default select example">
+                        <select ref={Manuf} className="form-select" id='figMan' aria-label="Default select example">
                             {SelectManufacturers}
                         </select>
-                        <select className="form-select" id='figChar' aria-label="Default select example">
+                        <select ref={Chara} className="form-select" id='figChar' aria-label="Default select example">
                             {SelectCharacters}
                         </select>
-                        <select className="form-select" id='figLine' aria-label="Default select example">
+                        <select ref={Lines} className="form-select" id='figLine' aria-label="Default select example">
                             {SelectLines}
                         </select>
-                        <select className="form-select" id='figEdition' aria-label="Default select example">
+                        <select ref={Editions} className="form-select" id='figEdition' aria-label="Default select example">
                             {SelectEditions}
                         </select>
-                        <input type='number' className='form-control' defaultValue='0' min='0' id='figSize' placeholder='SIZE....' />
-                        <input type='number' className='form-control' defaultValue='0' min='0' id='figScale' placeholder='SCALE....' />
+                        <input ref={Sizes} type='number' className='form-control' defaultValue='0' min='0' id='figSize' placeholder='SIZE....' />
+                        <input ref={Scales} type='number' className='form-control' defaultValue='0' min='0' id='figScale' placeholder='SCALE....' />
                         {/* <input type='number' className='form-control' id='figBrand' placeholder='BRAND ID....' />
                         <input type='number' className='form-control' id='figMan' placeholder='MANUFACTURER ID....' />
                         <input type='number' className='form-control' id='figChar' placeholder='CHARACTER ID....' />
@@ -408,7 +409,7 @@ function AddEdit(props) {
                     </div>
                 </div>
                 <br />
-                <div>
+                <div id='adminpage'>
                     <input type="file" className='form-control w-25' id='ImgInput' />
                     <img id='preview' className='w-25 p-5' alt='' src='' />
                     <button className='btn btn-success' onClick={addNewImage}>Save Image</button>

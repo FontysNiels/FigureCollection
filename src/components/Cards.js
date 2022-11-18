@@ -3,7 +3,7 @@ import './Cards.css';
 import CardItem from './CardItem';
 import {
   GetAllFigures, GetFiguresByBrand, GetFiguresByManufacturer, GetAllCollectedFromUser, GetAllUsers,
-  GetSpecificFigureImage, GetAllFigureImages
+  GetSpecificFigureImage, GetAllPreviewFigureImages
 } from './API';
 
 const Cards = props => {
@@ -60,16 +60,17 @@ const Cards = props => {
     }
 
     //Make Preview Images
-    let allimagesdata = GetAllFigureImages();
+    let allimagesdata = GetAllPreviewFigureImages();
     if (allimagesdata) {
       for (let index = 0; index < FigureId.length; index++) {
         for (let i = 0; i < allimagesdata.length; i++) {
           if (allimagesdata[i].figure.id === FigureId[index]) {
-            LocList.push(allimagesdata[i].imgData)
+            LocList.push(allimagesdata[i].imgData);
           }
         }
       }
     }
+    console.log(LocList)
     for (let index = 0; index < LocList.length; index++) {
       let classUse = "cards";
       GetSpecificFigureImage(LocList[index], classUse)
