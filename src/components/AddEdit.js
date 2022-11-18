@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 import axios from 'axios';
-import { GetAllBrands, GetAllManufacturers, GetAllCharacters, GetAllLines, GetAllEditions, GetAllFigures, AddFigureImage, GetSpecificFigureImage, GetSpecificFigureImageData } from './API';
+import { GetAllBrands, GetAllManufacturers, GetAllCharacters, GetAllLines, GetAllEditions, GetAllFigures, AddFigureImage } from './API';
 
 function AddEdit(props) {
     let AllBrands = [];
