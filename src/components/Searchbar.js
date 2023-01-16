@@ -1,13 +1,17 @@
 import React from 'react';
 import '../App.css';
-import { Button } from './Button';
 
 
 function Searchbar() {
   return (
     <div className='Searchbar'>
-    <input type='text' placeholder='Search'></input>
-    <Button className='btn' buttonStyle='btn--outline--red' buttonSize='btn--medium'>Search</Button>
+      <div class="input-group mx-auto w-25">
+        
+        <input type='text' className='form-control w-75 mx-auto' placeholder='Search'></input>
+        <button className='bnt-figure btn-search'>Search</button>
+      </div>
+      
+     
     </div>
   );
 }

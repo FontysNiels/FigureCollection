@@ -48,6 +48,11 @@ body {
   background: linear-gradient(90deg, rgb(26, 23, 23)0%, rgb(12 165 80)  100%);
 }
 
+.btn-search{
+  background: linear-gradient(90deg, rgb(26, 23, 23)0%, rgb(184, 29, 29)  100%);
+  border-radius: 5px;
+}
+
 .btn-figure:hover{
   color: white;
   transform: scale(1.1);
